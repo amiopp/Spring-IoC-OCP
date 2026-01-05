@@ -2,14 +2,12 @@ package metier;
 
 import dao.IDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component("metier")
 public class MetierImpl implements IMetier {
 
     @Autowired
-    @Qualifier("dao2") // Spécifie quelle implémentation de IDao utiliser
     private IDao dao;
 
     @Override
@@ -17,7 +15,10 @@ public class MetierImpl implements IMetier {
         return dao.getValue() * 2;
     }
 
-    public void setDao(IDao dao) {
-        this.dao = dao;
-    }
+    // Optional: Trace to see what was injected
+    // @PostConstruct
+    // public void init() {
+    // System.out.println("[TRACE] DAO injected: " +
+    // dao.getClass().getSimpleName());
+    // }
 }
